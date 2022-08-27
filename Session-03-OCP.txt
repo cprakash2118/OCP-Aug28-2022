@@ -54,6 +54,8 @@ Part 1-
   Secret Name = sre_team_secret)
   Secret file name = file-users-sre_team.txt)
   
+  for x in {6..10} ; do if [ -f file-users-sre_team.txt ]; then htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-sre_team.txt user${x} password@123 ; fi ; done
+  
   user6-10 - 
   
   Details:-
@@ -61,6 +63,8 @@ Part 1-
   Identity Provider Name = devops_team_identity_provider, 
   Secret Name devops_team_secret;
   Secret file name = file-users-devops_team.txt 
+  
+  for x in {6..10} ; do if [ -f file-users-devops_team.txt ]; then htpasswd -B -b file-users-devops_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-devops_team.txt user${x} password@123 ; fi ; done 
   
   user11-30 
   
@@ -70,6 +74,8 @@ Part 1-
   Secret Name = application-01_team_secret;
   Secret file name = file-users-app-01_team.txt
   
+  for x in {11..30} ; do if [ -f file-users-app-01_team.txt ]; then htpasswd -B -b file-users-app-01_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-01_team.txt user${x} password@123 ; fi ; done 
+  
   user31-50 
   
   Details:
@@ -78,6 +84,8 @@ Part 1-
   Secret Name = application-02_team_secret;
   Secret file name = file-users-app-02_team.txt
   
+  for x in {31..50} ; do if [ -f file-users-app-02_team.txt ]; then htpasswd -B -b file-users-app-02_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-02_team.txt user${x} password@123 ; fi ; done 
+  
   user51-70 
   
   Details:
@@ -85,6 +93,8 @@ Part 1-
   Identity Provider Name = application-03_team_identity_provider; 
   Secret Name= application-03_team_secret;
   Secret file name = file-users-app-03_team.txt
+  
+  for x in {51..70} ; do if [ -f file-users-app-03_team.txt ]; then htpasswd -B -b file-users-app-03_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-03_team.txt user${x} password@123 ; fi ; done 
 
 ################################################ LAB-02## Solution Start ##########
 Login to workstation as "student" user - student/student
@@ -134,22 +144,11 @@ $ htpasswd  -B -b file-users-sre_team.txt user5 password@123
 or 
 **** OPtion-02 
 $ htpasswd -c -B -b file-users-sre_team.txt user1 password@123
-$ for name in {2..5}
- do
- htpasswd -B -b file-users-sre_team.txt user${x} password@123
- done 
+$ for x in {6..10} ; do  htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; done
 *** 
 
 *** OPtion-03 
-$ for name in {1..5}
- do
-  if [ -f file-users-sre_team.txt ]
-   then
-     htpasswd -B -b file-users-sre_team.txt user${x} password@123
-   else
-     htpasswd -c -B -b file-users-sre_team.txt user${x} password@123
-  fi
- done 
+$ for x in {6..10} ; do if [ -f file-users-sre_team.txt ]; then htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-sre_team.txt user${x} password@123 ; fi ; done
 ***
 
 ## Verify your file (which we need to upload to OCP cluster - using secret).
