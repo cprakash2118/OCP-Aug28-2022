@@ -170,14 +170,32 @@ password@123 - password of user1
 Note: Same need to follow for other teams.
 
 
+###########
+for x in {1..5} ; do if [ -f file-users-sre_team.txt ]; then htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-sre_team.txt user${x} password@123 ; fi ; done
+
+
+for x in {6..10} ; do if [ -f file-users-devops_team.txt ]; then htpasswd -B -b file-users-devops_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-devops_team.txt user${x} password@123 ; fi ; done
+
+
+
+for x in {11..30} ; do if [ -f file-users-app-01_team.txt ]; then htpasswd -B -b file-users-app-01_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-01_team.txt user${x} password@123 ; fi ; done
+
+
+for x in {31..50} ; do if [ -f file-users-app-02_team.txt ]; then htpasswd -B -b file-users-app-02_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-02_team.txt user${x} password@123 ; fi ; done
+
+
+for x in {51..70} ; do if [ -f file-users-app-03_team.txt ]; then htpasswd -B -b file-users-app-03_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-03_team.txt user${x} password@123 ; fi ; done
+
+###########
+
 
 ##***Step-04 - Create secret (for multiple teams) 
 
 $ oc create secret generic sre_team_secret --from-file htpasswd=file-users-sre_team.txt -n openshift-config
-$ oc create secret generic devops_team_secret --from-file htpasswd=file-users-devops_team.txt -n openshift-config
-$ oc create secret generic app-01_team_secret --from-file htpasswd=file-users-app-01_team.txt -n openshift-config
-$ oc create secret generic app-02_team_secret --from-file htpasswd=file-users-app-02_team.txt -n openshift-config
-$ oc create secret generic app-03_team_secret --from-file htpasswd=file-users-app-03_team.txt -n openshift-config
+$ oc create secret generic devops-team-secret --from-file htpasswd=file-users-devops_team.txt -n openshift-config
+$ oc create secret generic app-01-team-secret --from-file htpasswd=file-users-app-01_team.txt -n openshift-config
+$ oc create secret generic app-02-team-secret --from-file htpasswd=file-users-app-02_team.txt -n openshift-config
+$ oc create secret generic app-03-team-secret --from-file htpasswd=file-users-app-03_team.txt -n openshift-config
 
 
 Verify the secrets 
