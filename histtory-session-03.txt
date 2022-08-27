@@ -1,0 +1,134 @@
+    1  clear
+    2  exit
+    3  ss utility -| root
+    4  ssh utility -l root 
+    5  oc login -u kubeadmin -p WdBz8-mLKk9-yVN75-UhaiU
+    6  oc login -u kubeadmin -p WdBz8-mLKk9-yVN75-UhaiU  https://api.ocp4.example.com:6443
+    7  mkdir work 
+    8  cd work/
+    9  pwd
+   10  ll
+   11  for x in {1..5} ; do if [ -f file-users-sre_team.txt ]; then htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-sre_team.txt user${x} password@123 ; fi ; done
+   12  for x in {6..10} ; do if [ -f file-users-devops_team.txt ]; then htpasswd -B -b file-users-devops_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-devops_team.txt user${x} password@123 ; fi ; done
+   13  for x in {11..30} ; do if [ -f file-users-app-01_team.txt ]; then htpasswd -B -b file-users-app-01_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-01_team.txt user${x} password@123 ; fi ; done
+   14  for x in {31..50} ; do if [ -f file-users-app-02_team.txt ]; then htpasswd -B -b file-users-app-02_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-02_team.txt user${x} password@123 ; fi ; done
+   15  for x in {51..70} ; do if [ -f file-users-app-03_team.txt ]; then htpasswd -B -b file-users-app-03_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-03_team.txt user${x} password@123 ; fi ; done
+   16  ll
+   17  oc create secret generic sre_team_secret --from-file htpasswd=file-users-sre_team.txt -n openshift-config
+   18  oc create secret generic devops_team_secret --from-file htpasswd=file-users-devops_team.txt -n openshift-config
+   19  oc create secret generic app-01_team_secret --from-file htpasswd=file-users-app-01_team.txt -n openshift-config
+   20  oc create secret generic app-02_team_secret --from-file htpasswd=file-users-app-02_team.txt -n openshift-config
+   21  oc create secret generic app-03_team_secret --from-file htpasswd=file-users-app-03_team.txt -n openshift-config
+   22  history 
+   23  oc create secret generic sre_team_secret --from-file htpasswd=file-users-sre_team.txt -n openshift-config
+   24  oc create secret generic sre-team-secret --from-file htpasswd=file-users-sre_team.txt -n openshift-config
+   25  oc create secret generic devops-team-secret --from-file htpasswd=file-users-devops_team.txt -n openshift-config
+   26  oc create secret generic app-03-team-secret --from-file htpasswd=file-users-app-03_team.txt -n openshift-config
+   27  oc create secret generic app-02-team-secret --from-file htpasswd=file-users-app-02_team.txt -n openshift-config
+   28  oc create secret generic app-01-team-secret --from-file htpasswd=file-users-app-01_team.txt -n openshift-config
+   29  oc get oauth/cluster -o yaml > oauth.yaml 
+   30  vim oauth.yaml 
+   31  oc create -f oauth.yaml 
+   32  vim oauth.yaml 
+   33  oc create -f oauth.yaml 
+   34  vim oauth.yaml 
+   35  oc create -f oauth.yaml 
+   36  vim ouath.yaml
+   37   vim oauth.yaml 
+   38  oc replace -f oauth.yaml
+   39  oc login  -u user1 -p password@123 
+   40  oc login -u user1 -p password@123 
+   41  oc login -u user4 -p password@123 
+   42  oc login -u user21 -p password@123 
+   43  oc login -u user65 -p password@123 
+   44  vim oauth.yaml 
+   45  oc whoami 
+   46  oc login -u kubeadmin -p WdBz8-mLKk9-yVN75-UhaiU  https://api.ocp4.example.com:6443
+   47  oc get  users
+   48  #oc login -u user1 -p password@123 
+   49  for x in {1..70}; do oc login -u user$x -p password@123; done
+   50  oc login -u kubeadmin -p WdBz8-mLKk9-yVN75-UhaiU  https://api.ocp4.example.com:6443
+   51  oc get users
+   52  oc get users | head -30
+   53  oc --help |less
+   54  oc adm --help |less
+   55  oc adm groups --help |less
+   56  oc adm groups --help 
+   57  oc adm groups new --help |less
+   58  oc adm groups new sre_team_grp 
+   59  oc adm groups new devops_team_grp 
+   60  oc adm groups new app-01_team_grp 
+   61  oc adm groups new app-02_team_grp 
+   62  oc adm groups new app-03_team_grp 
+   63  oc get groups.user.openshift.io 
+   64  oc adm groups add-users --help |les
+   65  oc adm groups add-users --help |less
+   66  oc adm groups add-users sre_team_grp user1 user2 user3 user4 user5
+   67  oc get groups.user.openshift.io 
+   68  oc adm groups add-users devops_team_grp user6 user7 user8 user9 user10 
+   69  oc get groups.user.openshift.io 
+   70  for x in {11..30}; do oc adm groups add-users app-01_team_grp user$x; done
+   71  oc get groups
+   72  for x in {31..50}; do oc adm groups add-users app-02_team_grp user$x; done
+   73  for x in {51..70}; do oc adm groups add-users app-03_team_grp user$x; done
+   74  oc get groups
+   75  oc adm policy add-cluster-role-to-group --help |less
+   76  #oc adm policy add-cluster-role-to-group ROLE GROUP [GROUP...] [flags]
+   77  oc adm policy add-cluster-role-to-group cluster-admin sre_team_grp
+   78  oc new-project project-01-zepto 
+   79  oc login -u user6 -p password@123
+   80  oc get nodes
+   81  oc logout 
+   82  oc login -u user4 -p password@123
+   83  oc get  nodes
+   84  oc get secret kubeadmin -n kube-system 
+   85  oc delete secret kubeadmin -n kube-system 
+   86  oc whoami 
+   87  oc login -u user20 -p password@123
+   88  oc whoami 
+   89  oc new-project p1
+   90  oc logout 
+   91  oc login -u user4 -p password@123
+   92  oc whoami 
+   93  oc describe clusterrolebindings | grep slef 
+   94  oc describe clusterrolebindings | les
+   95* oc describe clusterrolebindings 
+   96  oc describe clusterrolebindings |grep -i self-pro
+   97  oc describe clusterrolebindings self-provisioner
+   98  oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+   99  oc login -u user20 -p password@123
+  100  oc whoami 
+  101  oc new-project p2
+  102  oc logout 
+  103  oc login -u user4 -p password@123
+  104  oc adm policy add-cluster-role-to-group self-provisioner devops_team_grp 
+  105  oc describe clusterrolebindings self-provisioner
+  106  oc adm policy add-cluster-role-to-user cluster-admin user6
+  107  oc adm policy add-cluster-role-to-user cluster-admin user10
+  108  oc new-project project-app-01 
+  109  oc new-project project-app-02
+  110  oc new-project project-app-03
+  111  oc adm policy add-role-to-user admin user11 -n project-app-01 
+  112  oc adm policy add-role-to-user admin user31 -n project-app-02
+  113  oc adm policy add-role-to-user admin user51 -n project-app-03
+  114  oc adm policy add-role-to-user admin user12 -n project-app-01 
+  115  oc adm policy add-role-to-user admin user13 -n project-app-01 
+  116  oc adm policy add-role-to-user admin user14 -n project-app-01 
+  117  oc adm policy add-role-to-user admin user15 -n project-app-01 
+  118  oc describe project project-app-01
+  119  oc project -q
+  120  oc project project-app-01
+  121  oc project -q
+  122  oc describe project project-app-01
+  123  oc describe rolebindings.rbac.authorization.k8s.io |less
+  124  oc amd policy add-role-to-user edit user16 -n project-app-01
+  125  oc adm policy add-role-to-user edit user16 -n project-app-01
+  126  for x in {17..30}; do oc adm policy add-role-to-user edit user$x -n project-app-01; done
+  127  oc project -q
+  128  for x in {25..30}; do oc adm policy add-role-to-user view user$x -n project-app-01; done
+  129  for x in {25..30}; do oc adm policy remove-role-from-user edit user$x -n project-app-01; done
+  130  oc describe rolebindings.rbac.authorization.k8s.io |less
+  131  ll
+  132  git clone https://github.com/cprakash2118/OCP-Aug28-2022
+  133  history 
+  134  history > histtory-session-03.txt
