@@ -47,16 +47,44 @@ Point 1- Login to OCP cluster using "oc" and web-console.
 LAB-02##
 - 
 Part 1-
-  user1-5  - Group Name = sre_team ; Identity Provider Name = sre_team_identity_provider; Secret Name = sre_team_secret)
-  Secret file name = file-users-sre_team.txt). 
+  user1-5  - 
+  Details:-
+  Group Name = sre_team ; 
+  Identity Provider Name = sre_team_identity_provider; 
+  Secret Name = sre_team_secret)
+  Secret file name = file-users-sre_team.txt)
   
-  user6-10 - Group Name = devops_team; Identity Provider Name = devops_team_identity_provider, Secret Name devops_team_secret, Secret file name = file-users-devops_team.txt 
+  user6-10 - 
   
-  user11-30 (Group Name = application-01_team ; Identity Provider Name = application-01_team_identity_provide; Secret Name = application-01_team_secret, Secret file name = file-users-app-01_team.txt
+  Details:-
+  Group Name = devops_team; 
+  Identity Provider Name = devops_team_identity_provider, 
+  Secret Name devops_team_secret;
+  Secret file name = file-users-devops_team.txt 
   
-  user31-50 (Group Name = application-02_team ; Identity Provider Name = application-02_team_identity_provider; Secret Name = application-02_team_secret, Secret file name = file-users-app-02_team.txt)
+  user11-30 
   
-  user51-70 (Group Name = application-03_team ; Identity Provider Name = application-03_team_identity_provider; Secret Name= application-03_team_secret, Secret file name = file-users-app-03_team.txt)
+  Details:
+  Group Name = application-01_team ; 
+  Identity Provider Name = application-01_team_identity_provide; 
+  Secret Name = application-01_team_secret;
+  Secret file name = file-users-app-01_team.txt
+  
+  user31-50 
+  
+  Details:
+  Group Name = application-02_team ;
+  Identity Provider Name = application-02_team_identity_provider; 
+  Secret Name = application-02_team_secret;
+  Secret file name = file-users-app-02_team.txt
+  
+  user51-70 
+  
+  Details:
+  Group Name = application-03_team ; 
+  Identity Provider Name = application-03_team_identity_provider; 
+  Secret Name= application-03_team_secret;
+  Secret file name = file-users-app-03_team.txt
 
 ################################################ LAB-02## Solution Start ##########
 Login to workstation as "student" user - student/student
