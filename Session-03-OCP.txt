@@ -97,6 +97,8 @@ Part 1-
   for x in {51..70} ; do if [ -f file-users-app-03_team.txt ]; then htpasswd -B -b file-users-app-03_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-app-03_team.txt user${x} password@123 ; fi ; done 
 
 ################################################ LAB-02## Solution Start ##########
+
+##***Step-01
 Login to workstation as "student" user - student/student
 $ ssh root@utility 
 # cd /home/lab/ocp4/auth/
@@ -120,19 +122,22 @@ server: https://api_url.apps.ocp4.example.com:6443   (Just an example).
 $ cat kubeadmin-password 
 uiwgdiuaslkasjdlkasjl        (Just an example).
 
-Login to OCP cluster 
+##***Step-02 - Login to OCP cluster 
+
     $ pwd
 	$ ls -l kubeadmin-password  kubeconfig
 	$ oc login -u kubeadmin -p "uiwgdiuaslkasjdlkasjl" https://api_url.apps.ocp4.example.com:6443 
 	$ oc whoami 
 	$ oc get nodes 
 
-Note create users (for multiple teams).
+
+##***Step-03 - Create users (for multiple teams).
 $ mkdir work
 $ cd work 
 $pwd
 /home/student/work 
 
+************* SRE team 
 Note: password@123 or redhat@123 only to setup.
 *** OPtion-01 
 $ htpasswd -c -B -b file-users-sre_team.txt user1 password@123
@@ -159,7 +164,38 @@ htpasswd is a utility to create user (who can do web authentication.
 file-users-sre_team.txt - file 
 user1   - user 
 password@123 - password of user1 
- 
+
+************* SRE team work  Ends here  
+
+Note: Same need to follow for other teams.
+
+
+
+##***Step-04 - Create secret (for multiple teams) 
+
+$ oc create secret generic sre_team_secret --from-file htpasswd=file-users-sre_team.txt -n openshift-config
+$ oc create secret generic devops_team_secret --from-file htpasswd=file-users-devops_team.txt -n openshift-config
+$ oc create secret generic app-01_team_secret --from-file htpasswd=file-users-app-01_team.txt -n openshift-config
+$ oc create secret generic app-02_team_secret --from-file htpasswd=file-users-app-02_team.txt -n openshift-config
+$ oc create secret generic app-03_team_secret --from-file htpasswd=file-users-app-03_team.txt -n openshift-config
+
+
+Verify the secrets 
+$ oc get secret -n openshift-config | grep team_secret
+
+
+##***Step-05 - Update to oauth file which will update to OCP cluster.
+$ oc get oauth/cluster -o yaml >> oauth.yaml
+UPdate the file as per given instructions.
+
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.5/html/authentication_and_authorization/understanding-identity-provider#identity-provider-default-CR_understanding-identity-provider
+
+$ oc replace -f oauth.yaml 
+
+Verify user's login to OCP cluster.
+
+$ oc login -u user1 -p password@123 API_URL_link 
+
 
 
 ################################################ LAB-02## Solution End #############
@@ -171,6 +207,8 @@ Part 2-
   application-01_team_grp - user11-30
   application-02_team_grp - user31-50
   application-03_team_grp - user51-71
+  
+  
 
 LAB-04##
 Part 3-  
