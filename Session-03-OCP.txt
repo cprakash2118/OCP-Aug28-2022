@@ -144,11 +144,11 @@ $ htpasswd  -B -b file-users-sre_team.txt user5 password@123
 or 
 **** OPtion-02 
 $ htpasswd -c -B -b file-users-sre_team.txt user1 password@123
-$ for x in {6..10} ; do  htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; done
+$ for x in {1..5} ; do  htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; done
 *** 
 
 *** OPtion-03 
-$ for x in {6..10} ; do if [ -f file-users-sre_team.txt ]; then htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-sre_team.txt user${x} password@123 ; fi ; done
+$ for x in {1..5} ; do if [ -f file-users-sre_team.txt ]; then htpasswd -B -b file-users-sre_team.txt user${x} password@123 ; else htpasswd -c -B -b file-users-sre_team.txt user${x} password@123 ; fi ; done
 ***
 
 ## Verify your file (which we need to upload to OCP cluster - using secret).
