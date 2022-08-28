@@ -291,7 +291,9 @@ Step 4) Access the application outside the oCP cluster.
  
  
 #################
- LAB-01 w.r.t APplication deployment and RBAC.
+ 
+## LAB-01 w.r.t APplication deployment and RBAC.
+ 
 1.1 user1 to user5 and login to OCP cluster.
 1.2 Create user1 and user3 and user2 are cluster-admin 
 1.3 Add all user to project-01 
@@ -300,5 +302,67 @@ Step 4) Access the application outside the oCP cluster.
 1.6 Expose the service and get access via outside OCP cluster 
 
 
+## Lab-02 w.r.t application and Database 
+
+2.1 Deploy mysql database using below image and information.
+
+Image name: registry.redhat.io/rhel8/mysql-80:1
+user=mysql 
+password=redhat123 
+database=test_secret 
+hostname=mysql 
+DB app name=mysql 
+
+
+2.2 Deply application and setup Database connectivity.
+
+IMage name:  quay.io/redhattraining/famous-quotes:2.1
+user=mysql 
+password=redhat123 
+database=test_secret 
+hostname=mysql 
+Application Name = quotes 
+
+2.3 Verify the network connectivity between Database and application.
+use curl telnet -v IP Port 
+
+
+
+
+Solution-Lab-02#
+
+
+- Login to OCP cluster 
+ $ oc login -u kubeadmin -p kzsjdsak https://api_url.ocp4.example.com 
+ $ oc new-projet demo02 
+ $ oc project -q 
+ $ oc new-app -n mysql --docker registry.redhat.io/rhel8/mysql-80:1
+ $ oc get pods  (This application will not be stable.
+ Create secret
+ $ oc create secret generic mysql \
+ --from-literal user=myuser --from-literal password=redhat123 \
+ --from-literal database=test_secrets --from-literal hostname=mysql
+
+ $ oc set env deployment/mysql --from secret/mysql  --prefix MYSQL_
+
+
+Application part.
+ $ oc new-app --name quotes --docker-image quay.io/redhattraining/famous-quotes:2.1
+ $ oc set env deployment/quotes --from secret/mysql  --prefix QUOTES_
+
+ $ oc get pods
+ $ oc expose service quotes --hostname 
  
+ 
+ =========== Inside DB 
+ env| grep nt
+ $ mysql -umyuser -predhat123
+ $ show databases;
+ $ use dataBASE_NAME;
+ $ show tables;
+ 
+ Note: QUOTES application deployed then DB table also created.
+ 
+ $ select * from quotes;
+
  
