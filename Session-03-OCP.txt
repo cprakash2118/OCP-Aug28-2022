@@ -290,6 +290,6 @@ Step 4) Access the application outside the oCP cluster.
  $ oc expose service --hostname anything.ocp4.example.com 
  
  
- 
+ --- 
  
  
