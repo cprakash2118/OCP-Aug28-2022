@@ -246,3 +246,50 @@ Part 4-
   application-01_team_project      (user11/12/13 - project admin, user14-25 - Edit, user26-30 View)
   application-02_team_project      (user31/32/33 - project admin, user34-45 - Edit, user46-50 View)
   application-03_team_project      (user51/52/53 - project admin, user54-65 - Edit, user66-70 View)
+ ===============================================
+#### Application deployment on Kubernetes/Openshift env.
+- To deploy simple application, some required minimal resources.
+  - POD 
+  - service or svc 
+  - Deploymemnt 
+  - DeploymentConfig (dc)
+  - BuildConfig (bc) 
+  - secret (generic, docker-registry, tls
+  - COnfigMap (cm).
+  - Image STream etc 	
+  - Route/ingress  
+
+Step 1. Login to OCP clutser as cluster-admin/admin (sre_users or kubeadmin - if you have not deleted kubeadmin).
+
+$ oc login -u kubeadmin -p kjasdhjaskd API_URL 
+
+Step 2) Verify your project and access.
+ $ oc new-project project-01 
+ $ oc project -q 
+ project-01 
+ 
+ $ oc get pods
+ $ oc get svc 
+ $ oc get deploymnent
+ $ oc get route 
+ $ oc get is
+ 
+NO result from above.
+
+STep 3)
+
+ $ oc new-app app01 httpd     (app01 - is an application and httpd is can image used to build application).
+ $ oc get pods 
+ 
+ $ oc get svc 
+ $ oc get deployment
+ $ oc get is 
+
+Step 4) Access the application outside the oCP cluster.
+
+ $ oc expose service --hostname anything.ocp4.example.com 
+ 
+ 
+ 
+ 
+ 
